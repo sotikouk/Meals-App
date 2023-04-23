@@ -9,6 +9,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MealsOverviewScreen from './screens/MealsOverviewScreen';
 import MealScreen from './screens/MealScreen';
 import FavoritesScreen from './screens/FavoritesScreen';
+import FavoritesContextProvider from './store/context/favorites-context';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -26,13 +27,15 @@ export default function App() {
   return (
     <>
           <StatusBar style = 'dark' />
-          <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen name="Meals App" component={DrawerNavigator} options={{headerShown: false}}/>
-            <Stack.Screen name="mealsOverview" component={MealsOverviewScreen}/>
-            <Stack.Screen name="mealScreen" component={MealScreen}/>
-          </Stack.Navigator>
-          </NavigationContainer>
+            <FavoritesContextProvider>
+              <NavigationContainer>
+                <Stack.Navigator>
+                  <Stack.Screen name="Meals App" component={DrawerNavigator} options={{headerShown: false}}/>
+                  <Stack.Screen name="mealsOverview" component={MealsOverviewScreen}/>
+                  <Stack.Screen name="mealScreen" component={MealScreen}/>
+                </Stack.Navigator>
+              </NavigationContainer>
+            </FavoritesContextProvider>
     </>
   );
 }
